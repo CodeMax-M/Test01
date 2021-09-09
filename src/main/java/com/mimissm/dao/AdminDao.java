@@ -14,7 +14,7 @@ public interface AdminDao {
     long countByExample2(AdminExample example);
 
     long countByExample3(AdminExample example);
-
+    long countByExample4(AdminExample example);
     int deleteByExample(AdminExample example);
 
     int deleteByPrimaryKey(Integer aId);
