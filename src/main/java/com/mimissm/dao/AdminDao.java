@@ -8,7 +8,13 @@ import java.util.List;
 
 public interface AdminDao {
     long countByExample(AdminExample example);
-    long countByExample111(AdminExample example);
+
+    long countByExample1(AdminExample example);
+
+    long countByExample2(AdminExample example);
+
+    long countByExample3(AdminExample example);
+
     int deleteByExample(AdminExample example);
 
     int deleteByPrimaryKey(Integer aId);
