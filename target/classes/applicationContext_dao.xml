@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--导入jdbc.properties-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!--设置数据源-->
+    <bean class="com.alibaba.druid.pool.DruidDataSource" name="dataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!--SqlSessionFactoryBean
+      1.配置数据源
+      2.配置MyBatis的核心配置文件
+      3.实体类
+      -->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" name="sqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--别名-->
+        <property name="typeAliasesPackage" value="com.mimissm.pojo"/>
+    </bean>
+    <!--mapper文件的扫描器-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" name="mapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"/>
+        <property name="basePackage" value="com.mimissm.dao"/>
+    </bean>
+</beans>
